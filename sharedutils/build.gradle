@@ -1,0 +1,74 @@
+apply from: '../constants.gradle'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'  // Ensure this line is present
+
+android {
+    namespace "com.example.sharedutils"  // Ensure namespace is set
+    compileSdkVersion 34
+    namespace "com.liskovsoft.sharedutils"
+
+    defaultConfig {
+        minSdkVersion 24  // Ensure a valid minSdkVersion
+        targetSdkVersion 34
+        versionCode 3
+        versionName "1.3"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17  // Updated to Java 17 for Gradle 8.4
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError true
+    }
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.9'
+    testImplementation project(path: ':sharedtests')
+    testImplementation project(path: ':sharedutils')
+
+    implementation project(path: ':commons-io-2.8.0')
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.preference:preference:1.2.1'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+    implementation 'com.squareup.okhttp3:okhttp-dnsoverhttps:4.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
+    implementation 'com.squareup.okhttp3:okhttp-brotli:4.11.0'
+
+    implementation('com.localebro:okhttpprofiler:1.0.8') {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+
+    implementation 'com.github.google:cronet:latest.release'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'com.jakewharton:disklrucache:2.0.2'
+
+    implementation 'info.guardianproject.netcipher:netcipher:2.1.0'
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.0'  // Updated Kotlin library
+}

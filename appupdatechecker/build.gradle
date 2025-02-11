@@ -1,0 +1,50 @@
+apply from: '../constants.gradle'
+apply plugin: 'com.android.library'
+
+android {
+    namespace "edu.mit.mobile.android.appupdater"
+    compileSdkVersion 34
+    namespace "com.liskovsoft.sharedutils"
+    
+    namespace "com.example.sharedtests"  // Add this namespace
+    compileSdkVersion 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17  // Updated for Gradle 8.4
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    defaultConfig {
+        minSdkVersion 24  // Ensure minSdkVersion is valid
+        targetSdkVersion 34
+        versionCode 4
+        versionName "0.4.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1') {
+        exclude group: 'androidx.annotation', module: 'annotation'
+    }
+    testImplementation 'junit:junit:4.13.2'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':sharedutils')
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'org.xbill:dnsjava:3.5.2'  
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.apache.commons.commonsio">
+
+    android {
+    namespace "com.liskovsoft.sharedutils"
+}
+
+    
+
+    <application>
+        <!-- Define required components here if needed -->
+    </application>
+
+</manifest>

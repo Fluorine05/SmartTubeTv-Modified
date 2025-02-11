@@ -1,0 +1,4 @@
+android.enableJetifier = true
+android.useAndroidX = true
+android.jetifier.ignorelist=true
+org.gradle.jvmargs=-Xmx2000m

@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+
+android {
+    namespace "com.example.sharedtests"  // Add this namespace
+    compileSdkVersion 34
+    namespace "com.liskovsoft.sharedutils"
+    defaultConfig {
+        minSdkVersion 24  // Ensure minSdkVersion is valid
+        targetSdkVersion 34
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.13.2'
+}

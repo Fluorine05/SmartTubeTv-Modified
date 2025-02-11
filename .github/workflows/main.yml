@@ -1,0 +1,41 @@
+name: Android APK Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Kotlin
+        run: |
+          curl -sS https://get.sdkman.io | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install kotlin 1.9.0
+
+      - name: Fix Gradlew Permissions
+        run: chmod +x gradlew
+
+      - name: Upgrade Gradle Wrapper
+        run: ./gradlew wrapper --gradle-version 8.4 --distribution-type bin
+
+      - name: Sync Dependencies
+        run: ./gradlew dependencies --stacktrace
+
+      - name: Build APK
+        run: ./gradlew assembleDebug --stacktrace --warning-mode all
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SmartTube-APK
+          path: app/build/outputs/apk/debug/app-debug.apk

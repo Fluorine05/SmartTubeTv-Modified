@@ -1,0 +1,13 @@
+project.ext {
+    minSdkVersion = 17
+    targetSdkVersion = 33
+    compileSdkVersion = 33
+    buildToolsVersion = '30.0.3'
+    gradleVersion = '8.4' // Update to latest stable version
+    androidGradleVersion = '8.1.1' // Updated for latest compatibility
+    kotlinVersion = '1.9.0' // Align with build.gradle
+
+    gsonVersion = '2.8.9'
+    guavaVersion = '31.1-android' 
+    retrofitVersion = '2.9.0'
+}
